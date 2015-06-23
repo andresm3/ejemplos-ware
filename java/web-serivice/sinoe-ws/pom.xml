@@ -1,0 +1,142 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>pe.gob.pj.sinoe.servcioweb</groupId>
+    <artifactId>sinoe-ws</artifactId>
+    <packaging>war</packaging>
+    <version>1.0</version>
+    <name>sinoe-ws</name>
+    <url>http://maven.apache.org</url>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.version>4.0.5.RELEASE</spring.version>
+        <java.version>1.7</java.version>
+        <junit.version>4.8.2</junit.version>
+
+        <version.jboss.as.maven.plugin>7.3.Final</version.jboss.as.maven.plugin>
+    </properties>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jvnet.jax-ws-commons.spring</groupId>
+            <artifactId>jaxws-spring</artifactId>
+            <version>1.9</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+
+        <!-- -->
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>xalan</groupId>
+            <artifactId>xalan</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+      
+
+    </dependencies>
+
+    <build>
+        <finalName>sinoe-ws</finalName>
+
+        <plugins>
+
+            <!-- Ensures we are compiling at 1.6 level -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <!--<configuration>
+                    <webappDirectory>/sample/servlet/container/deploy/directory</webappDirectory>
+                </configuration>-->
+                <!--<configuration>
+                    <warSourceDirectory>webapp</warSourceDirectory>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>-->
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <targetPath>WEB-INF</targetPath>
+                            <directory>src/main/webapp/WEB-INF</directory>
+                            <filtering>true</filtering>
+                            <includes>
+                                <include>*.xml</include>
+                                <include>spring/application-context.xml</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+
+            <!-- Deployent on AS from console -->
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <version>${version.jboss.as.maven.plugin}</version>
+                <!--<executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>-->
+                <!--<configuration>
+                <hostname>172.33.5.183</hostname>
+                <username>jboss</username>
+                <password>jboss$123</password>
+                </configuration>-->
+                        <!--<configuration>
+                            <hostname>172.33.108.110</hostname>
+                            <username>admin</username>
+                            <password>@dm1n1str4d0r</password>
+                        </configuration>
+                    </execution>
+                </executions>-->
+            </plugin>
+
+        </plugins>
+
+
+
+    </build>
+</project>
